@@ -1,0 +1,29 @@
+body {
+    background: black url(../images/stars.jpg);
+    animation: stars 205s linear alternate;
+    color: rgb(255, 254, 254);
+}
+
+section {
+    margin-top: 100px;
+}
+
+section {
+    height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    font-size: 70px;
+}
+
+.credit {
+    text-align: center;
+}
+
+.wordisbigvideo {
+    height: 80vh;
+    display: block;
+    margin: 0 auto;
+    border-radius: 20px;
+}
