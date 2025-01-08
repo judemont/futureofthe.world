@@ -3,7 +3,7 @@ body {
     animation: stars 205s linear alternate;
     color: rgb(255, 254, 254);
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: sans-serif, sans-serif;
 }
 
 section {
