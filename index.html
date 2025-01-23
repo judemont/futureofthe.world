@@ -7,77 +7,87 @@
     <title>Future of the World</title>
     <link rel="stylesheet" href="styles/earth.css">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/loader.css">
 
-
+    <script src="scripts/loader.js"></script>
 </head>
 
-<body>
-    <section>
-        <h1>Future Of The World 🌐</h1>
-        <div id="earth1"></div>
-        <p class="credit">By <a href="https://futureofthe.tech">JdM</a></p>
-    </section>
-    <section>
-        <h1>The World is <u>BIG</u></h1>
-        <video class="wordisbigvideo" autoplay loop muted>
-            <source src="images/worldisbig.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </section>
-    <section>
-        <h1>The World is <u>Beautiful</u></h1>
-        <video class="wordisbigvideo" autoplay loop muted>
-            <source src="images/worldisbeautiful.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </section>
-    <section>
-        <h1>However <u>in the future</u>, our World <u>won't be Liveable</u></h1>
-        <video class="wordisbigvideo" autoplay loop muted>
-            <source src="images/unliveableworld.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </section>
-    <section class="final-section">
-        <h1>But,</h1>
-        <p class="important-txt">
-            the future is not written.<br>
-            <del>We can</del> <b><u>We must</u> change</b> this future.
-        </p>
-        <p class="important-txt">
-            We must do it because it's, <br>
-            <u>our</u> survival, <br>
-            <u>our</u> future, <br>
-            <u>our</u> <b style="font-size: 50px;">world</b>. <br>
-        </p>
-        <p class="important-txt">
-            We are the only ones who can save ourselves,<br>
-            together we can make it.
-        </p>
+<body onload="stopLoading()">
+    <div class="page-loader" id="loader">
+        <div class="spinner"></div>
+        <div class="txt">Loading the World...</div>
+    </div>
 
-        <div class="actionsList">
-            <ul>
-                <li>Save energy at home</li>
-                <li>Change your home's source of energy</li>
-                <li>Walk, bike or take public transport</li>
-                <li>Switch to an electric vehicle</li>
-                <li>Consider your travel</li>
-                <li>Reduce, reuse, repair and recycle</li>
-                <li>Eat more vegetables</li>
-                <li>Throw away less food</li>
-                <li>Clean up your environment</li>
-                <li><b>Speak up</b></li>
-            </ul>
-        </div>
+    <div id="all" style="display: none;">
+        <section>
+            <h1>Future Of The World 🌐</h1>
+            <div id="earth1"></div>
+            <p class="credit">By <a href="https://futureofthe.tech">JdM</a></p>
+        </section>
+        <section>
+            <h1>The World is <u>BIG</u></h1>
+            <video class="wordisbigvideo" autoplay loop muted>
+                <source src="images/worldisbig.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+        <section>
+            <h1>The World is <u>Beautiful</u></h1>
+            <video class="wordisbigvideo" autoplay loop muted>
+                <source src="images/worldisbeautiful.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+        <section>
+            <h1>However <u>in the future</u>, our World <u>won't be Liveable</u></h1>
+            <video class="wordisbigvideo" autoplay loop muted>
+                <source src="images/unliveableworld.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+        <section class="final-section">
+            <h1>But,</h1>
+            <p class="important-txt">
+                the future is not written.<br>
+                <del>We can</del> <b><u>We must</u> change</b> this future.
+            </p>
+            <p class="important-txt">
+                We must do it because it's, <br>
+                <u>our</u> survival, <br>
+                <u>our</u> future, <br>
+                <u>our</u> <b style="font-size: 50px;">world</b>. <br>
+            </p>
+            <p class="important-txt">
+                We are the only ones who can save ourselves,<br>
+                together we can make it.
+            </p>
 
-        <p class="important-txt">
-            <b>Act now</b> and <b>spread the word</b> to make a difference. <br>
-            <b>The best way to predict the future is to create it.</b>
-        </p>
+            <div class="actionsList">
+                <ul>
+                    <li>Save energy at home</li>
+                    <li>Change your home's source of energy</li>
+                    <li>Walk, bike or take public transport</li>
+                    <li>Switch to an electric vehicle</li>
+                    <li>Consider your travel</li>
+                    <li>Reduce, reuse, repair and recycle</li>
+                    <li>Eat more vegetables</li>
+                    <li>Throw away less food</li>
+                    <li>Clean up your environment</li>
+                    <li><b>Speak up</b></li>
+                </ul>
+            </div>
 
-        <p class="source">Source : <a href="https://www.un.org/en/actnow/ten-actions">un.org/en/actnow/ten-actions</a>
-        </p>
-    </section>
+            <p class="important-txt">
+                <b>Act now</b> and <b>spread the word</b> to make a difference. <br>
+                <b>The best way to predict the future is to create it.</b>
+            </p>
+
+            <p class="source">Source : <a
+                    href="https://www.un.org/en/actnow/ten-actions">un.org/en/actnow/ten-actions</a>
+            </p>
+        </section>
+
+    </div>
 
 </body>
 
