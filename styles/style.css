@@ -49,7 +49,6 @@ h1 {
     line-height: 1.2;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     text-shadow: 0 0 20px rgba(78, 201, 255, 0.2);
     opacity: 0;
     transform: translateY(30px);
