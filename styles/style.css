@@ -258,13 +258,21 @@ section:nth-child(5) {
     background: linear-gradient(135deg, rgba(10, 30, 60, 0.9), rgba(20, 10, 40, 0.8));
 }
 
+section:nth-child(6) {
+    background: linear-gradient(135deg, rgba(10, 30, 60, 0.9), rgba(0, 0, 0, 0.8));
+}
+
+section:nth-child(6) {
+    background: linear-gradient(135deg, rgba(10, 30, 60, 0.9), rgba(41, 27, 69, 0.8));
+}
+
 /* Final Section Styling */
 .final-section {
     text-align: center;
 }
 
 .important-txt {
-    font-size: clamp(1.2rem, 5vw, 2rem);
+    font-size: 20px;
     line-height: 1.6;
     margin-bottom: 2rem;
     transform: translateY(30px);
@@ -351,7 +359,7 @@ section:nth-child(5) {
 
 .source {
     font-size: 0.9rem;
-    margin-top: 2rem;
+    margin-top: 0.5rem;
     color: var(--text-tertiary);
     opacity: 0;
     animation: fadeIn 1s forwards;
