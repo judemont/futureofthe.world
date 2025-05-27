@@ -5,11 +5,668 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Future of the World</title>
-    <link rel="stylesheet" href="styles/earth.css">
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/loader.css">
+    <style>
+        /* Import Google Fonts */
+        @font-face {
+            font-family: Inter;
+            src: url('inter.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
 
-    <script src="scripts/loader.js"></script>
+        @font-face {
+            font-family: 'Space Grotesk';
+            src: url('sg.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --earth-gradient: linear-gradient(135deg, #74b9ff 0%, #0984e3 50%, #00b894 100%);
+            --danger-gradient: linear-gradient(135deg, #fd79a8 0%, #e84393 50%, #d63031 100%);
+            --hope-gradient: linear-gradient(135deg, #00cec9 0%, #55a3ff 50%, #74b9ff 100%);
+            --dark-bg: #0a0a0a;
+            --section-bg: rgba(15, 15, 25, 0.95);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #b2bec3;
+            --accent-blue: #74b9ff;
+            --accent-green: #00b894;
+            --accent-red: #e17055;
+        }
+
+        /* Global Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(116, 185, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 184, 148, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(225, 112, 85, 0.1) 0%, transparent 50%);
+            animation: backgroundShift 20s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes backgroundShift {
+
+            0%,
+            100% {
+                transform: translateX(0) translateY(0);
+            }
+
+            25% {
+                transform: translateX(-20px) translateY(-10px);
+            }
+
+            50% {
+                transform: translateX(20px) translateY(10px);
+            }
+
+            75% {
+                transform: translateX(-10px) translateY(20px);
+            }
+        }
+
+        /* Loader Styles */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--accent-blue);
+            border-right: 3px solid var(--accent-green);
+            border-radius: 50%;
+            animation: spinEarth 2s linear infinite;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .spinner::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            background: var(--earth-gradient);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes spinEarth {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        .txt {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInOut 2s ease-in-out infinite;
+        }
+
+        @keyframes fadeInOut {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        /* Section Styles */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 20px;
+            position: relative;
+            background: var(--section-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        section:nth-child(even) {
+            background: rgba(25, 25, 40, 0.95);
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(116, 185, 255, 0.3);
+        }
+
+        @keyframes titleGlow {
+
+            0%,
+            100% {
+                filter: brightness(1);
+            }
+
+            50% {
+                filter: brightness(1.2);
+            }
+        }
+
+        h1 u {
+            background: var(--danger-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            position: relative;
+        }
+
+        h1 u::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--danger-gradient);
+            animation: underlineGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes underlineGlow {
+
+            0%,
+            100% {
+                opacity: 0.7;
+                transform: scaleX(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scaleX(1.05);
+            }
+        }
+
+        /* Earth Animation Container */
+        #earth1 {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--earth-gradient);
+            margin: 2rem 0;
+            position: relative;
+            animation: earthRotate 20s linear infinite, earthPulse 4s ease-in-out infinite;
+            box-shadow:
+                0 0 50px rgba(116, 185, 255, 0.4),
+                inset 0 0 50px rgba(0, 0, 0, 0.3);
+        }
+
+        #earth1::before {
+            content: '🌍';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 8rem;
+            animation: earthRotateReverse 20s linear infinite;
+        }
+
+        #earth1::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, transparent, rgba(116, 185, 255, 0.2), transparent);
+            animation: earthAura 3s ease-in-out infinite;
+        }
+
+        @keyframes earthRotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes earthRotateReverse {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(-360deg);
+            }
+        }
+
+        @keyframes earthPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes earthAura {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.7;
+                transform: scale(1.1);
+            }
+        }
+
+        /* Video Styles */
+        .wordisbigvideo {
+            width: 90%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .wordisbigvideo:hover {
+            transform: scale(1.02) translateY(-5px);
+            box-shadow: 0 30px 80px rgba(116, 185, 255, 0.3);
+        }
+
+        /* Credits */
+        .credit {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        .credit:first-of-type {
+            right: 20px;
+        }
+
+        .credit:last-of-type {
+            left: 20px;
+        }
+
+        .credit a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .credit a:hover {
+            color: var(--accent-green);
+            text-shadow: 0 0 10px rgba(116, 185, 255, 0.5);
+        }
+
+        /* Final Section Styles */
+        .final-section {
+            background: linear-gradient(135deg, rgba(15, 15, 25, 0.95) 0%, rgba(25, 25, 40, 0.95) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="12" cy="8" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="8" cy="15" r="0.8" fill="rgba(255,255,255,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>');
+            opacity: 0.3;
+            animation: starsMove 30s linear infinite;
+        }
+
+        @keyframes starsMove {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-100px);
+            }
+        }
+
+        .important-txt {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            font-weight: 500;
+            text-align: center;
+            margin: 2rem 0;
+            max-width: 800px;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .important-txt b {
+            background: var(--hope-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .important-txt u {
+            color: var(--accent-green);
+            text-decoration: none;
+            position: relative;
+            font-weight: 600;
+        }
+
+        .important-txt u::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-green);
+            animation: underlineSlide 2s ease-in-out infinite;
+        }
+
+        @keyframes underlineSlide {
+
+            0%,
+            100% {
+                width: 100%;
+            }
+
+            50% {
+                width: 110%;
+            }
+        }
+
+        .important-txt del {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        /* Actions List */
+        .actionsList {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .actionsList ul {
+            list-style: none;
+            counter-reset: action-counter;
+        }
+
+        .actionsList li {
+            counter-increment: action-counter;
+            padding: 1rem 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+            position: relative;
+            padding-left: 3rem;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .actionsList li:last-child {
+            border-bottom: none;
+        }
+
+        .actionsList li::before {
+            content: counter(action-counter);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            background: var(--earth-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .actionsList li:hover {
+            color: var(--accent-blue);
+            transform: translateX(10px);
+        }
+
+        .actionsList li b {
+            color: var(--accent-green);
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        /* Source */
+        .source {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .source a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .source a:hover {
+            color: var(--accent-green);
+            text-shadow: 0 0 10px rgba(116, 185, 255, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 15px;
+                min-height: 100vh;
+            }
+
+            #earth1 {
+                width: 200px;
+                height: 200px;
+            }
+
+            #earth1::before {
+                font-size: 5rem;
+            }
+
+            .wordisbigvideo {
+                width: 95%;
+                border-radius: 15px;
+            }
+
+            .actionsList {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .credit {
+                position: static;
+                margin: 10px 0;
+            }
+
+            .important-txt b[style*="font-size"] {
+                font-size: 35px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .actionsList {
+                padding: 1.5rem;
+            }
+
+            .actionsList li {
+                font-size: 1rem;
+                padding: 0.8rem 0 0.8rem 2.5rem;
+            }
+
+            .actionsList li::before {
+                width: 25px;
+                height: 25px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Scroll Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section>* {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Giscus Container */
+        section:last-child {
+            min-height: auto;
+            padding: 40px 20px;
+        }
+    </style>
+    <script>
+        // Loader functionality
+        function stopLoading() {
+            const loader = document.getElementById('loader');
+            const content = document.getElementById('all');
+
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    content.style.display = 'block';
+                    content.style.opacity = '0';
+                    setTimeout(() => {
+                        content.style.transition = 'opacity 1s ease-in-out';
+                        content.style.opacity = '1';
+                    }, 100);
+                }, 500);
+            }, 2000);
+        }
+
+        // Intersection Observer for animations
+        document.addEventListener('DOMContentLoaded', function () {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all sections
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
 </head>
 
 <body onload="stopLoading()">
@@ -22,8 +679,13 @@
         <section>
             <h1>Future Of The World 🌐</h1>
             <div id="earth1"></div>
-            <p class="credit">By <a href="https://futureofthe.tech">JdM</a></p>
+            <p class="credit">Site created by <a href="https://futureofthe.tech">JdM</a>, and climate change by
+                humanity.</p>
+
+            <p class="credit"><a href="https://futureofthe.tech/posts/can-a-website-save-the-world/">ABOUT
+                    THIS SITE</a></p>
         </section>
+
         <section>
             <h1>The World is <u>BIG</u></h1>
             <video class="wordisbigvideo" autoplay loop muted>
@@ -31,6 +693,7 @@
                 Your browser does not support the video tag.
             </video>
         </section>
+
         <section>
             <h1>The World is <u>Beautiful</u></h1>
             <video class="wordisbigvideo" autoplay loop muted>
@@ -38,6 +701,7 @@
                 Your browser does not support the video tag.
             </video>
         </section>
+
         <section>
             <h1>However <u>in the future</u>, our World <u>won't be Liveable</u></h1>
             <video class="wordisbigvideo" autoplay loop muted>
@@ -45,6 +709,7 @@
                 Your browser does not support the video tag.
             </video>
         </section>
+
         <section class="final-section">
             <h1>But,</h1>
             <p class="important-txt">
@@ -62,6 +727,7 @@
                 together we can make it.
             </p>
         </section>
+
         <section>
             <div class="actionsList">
                 <ul>
@@ -77,15 +743,12 @@
                     <li><b>Speak up</b></li>
                 </ul>
             </div>
-
             <p class="important-txt">
                 <b>Act now</b> and <b>spread the word</b> to make a difference. <br>
                 <b>The best way to predict the future is to create it.</b>
             </p>
-
-            <p class="source">Source : <a
-                    href="https://www.un.org/en/actnow/ten-actions">un.org/en/actnow/ten-actions</a>
-            </p>
+            <p class="source">Source: <a
+                    href="https://www.un.org/en/actnow/ten-actions">un.org/en/actnow/ten-actions</a></p>
         </section>
 
         <section>
@@ -96,6 +759,7 @@
                 </script>
         </section>
     </div>
+
 
 </body>
 
